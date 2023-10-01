@@ -2,16 +2,16 @@ import cv2
 from ultralytics import YOLO
 import pandas as pd
 from tracker import *
-import numpy as np
-import time
 
+
+# Import model
 model=YOLO("best_nametag.pt")
 
 #Object Detection
 object_detector = cv2.createBackgroundSubtractorMOG2(history=100,varThreshold=40)
 tracker=EuclideanDistTracker()
 
-
+# Load video input and employee id list
 cap=cv2.VideoCapture('sample.mp4')
 employee_id=[]
 
@@ -27,6 +27,7 @@ while True:
     if not ret:
         break
 
+    # Filter contours by size and feed into the tracker
     for cnt in contours:
         area = cv2.contourArea(cnt)
         if area > 200:
@@ -36,8 +37,8 @@ while True:
     # object tracking
     boxes_ids = tracker.update(detections)
 
-    results = model.predict(frame)
     # Get coordinates of name tags detected within the frame
+    results = model.predict(frame)
     a = results[0].boxes.xyxy
     px = pd.DataFrame(a.cpu()).astype("float")
 
