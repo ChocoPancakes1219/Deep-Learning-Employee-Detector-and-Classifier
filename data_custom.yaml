@@ -1,0 +1,16 @@
+train:
+   - D:\pythonProject\Video Recognition\train
+   - D:\pythonProject\Video Recognition\Tag\train
+val: 
+   - D:\pythonProject\Video Recognition\valid
+   - D:\pythonProject\Video Recognition\Tag\valid
+
+nc: 2
+names: ['NameTag', 'Person']
+
+roboflow:
+  workspace: choco-pancakes
+  project: employee-u700i
+  version: 9
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/choco-pancakes/employee-u700i/dataset/9
